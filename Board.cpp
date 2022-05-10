@@ -62,14 +62,48 @@ Board::Board() : board(plain_board_init()) {}
 void Board::print_board() const {
 
     int index = 0;
+    
 
     for (int row = 0; row < 11; ++row) {
         for (int col = 0; col < 11; ++col) {
+            
             std::cout << board[index] << " ";
             ++index;
         }
         std::cout << std::endl;
     }
+}
+
+void Board::print_flipped_board() const {
+
+    int index = 97;
+    int num_index = 88;
+
+    for (int row0 = 0; row0 < 11; ++row0) {
+        std::cout << board[row0] << " ";
+    }
+    std::cout << std::endl;
+    for (int row = 0; row < 8; ++row) {
+        
+        std::cout << board[num_index] << " " << board[1] << " ";
+        num_index -= 11;
+
+        for (int col = 0; col < 8; ++col) {
+            
+            std::cout << board[index] << " ";
+            --index;
+        }
+        index -= 3;
+        std::cout << board[1] << std::endl;
+    }
+    for (int row9 = 0; row9 < 11; ++row9) {
+        std::cout << board[row9] << " ";
+    }
+    std::cout << std::endl << "   ";
+    for (int idx = 120; idx > 109; --idx) {
+        std::cout << board[idx] << " ";
+    }
+    std::cout << std::endl;
 }
 
 // Places piece at its index that was assigned upon creation

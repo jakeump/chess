@@ -19,7 +19,7 @@ class Piece;
 #define WHITE "\x1b[38;5;15m"
 #define BLACK "\x1b[30m"
 #define BLUE "\x1b[34m"
-#define CYAN "\x1b[36m"
+#define RED "\x1b[31m"
 #define RESET "\x1b[0m"
 
 class Board {
@@ -35,6 +35,9 @@ public:
 
     // Prints the board to terminal
     void print_board() const;
+
+    // Flips the board around for black
+    void print_flipped_board() const;
 
     void piece_board_init(const Piece *piece);
 

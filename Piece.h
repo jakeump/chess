@@ -43,6 +43,10 @@ public:
     // Returns the current position of the piece as an index of an array.
     int get_index() const;
 
+    // Takes an index and computes the row and column. Used for error checking moves
+    int get_temp_row(int idx) const;
+    int get_temp_col(int idx) const;
+
     void set_index(int idx_in);
 
     // Converts the index to rows and columns, corresponding with the board
@@ -53,8 +57,15 @@ public:
     // Moves the piece to the specified square. 
     // Validates the input to make sure the move is correct.
     // Calculate new index before moving.
-    virtual void move(Board *board, int new_idx) = 0;
-        // will call the board move function and put the piece at the new index, set the old index to what it was
+    virtual bool move(Board *board, int new_idx) = 0;
+
+    // Verifies input is within the 8x8 chess board
+    bool in_board(int row, int col) const;
+
+// vector<int> possible_moves const = 0;
+// calculates a vector of whatever moves are possible for each piece. must take into account
+// if it is hitting another piece
+// can be used to determine check
 
     // Needed to avoid some compiler errors
     virtual ~Piece() {}
@@ -66,11 +77,11 @@ public:
     // Constructor to initialize pawn. If 2 args, make it white
     Pawn(int idx_in, bool w);
 
-    // Constructor to initialize pawn. If 1 arg, make it black (cyan)
+    // Constructor to initialize pawn. If 1 arg, make it black (yellow)
     Pawn(int idx_in);
 
     // Moves piece to desired index and updates board
-    void move(Board *board, int new_idx) override;
+    bool move(Board *board, int new_idx) override;
 };
 
 class Rook : public Piece {
@@ -79,11 +90,11 @@ public:
     // Constructor to initialize pawn. If 2 args, make it white
     Rook(int idx_in, bool w);
 
-    // Constructor to initialize pawn. If 1 arg, make it black (cyan)
+    // Constructor to initialize pawn. If 1 arg, make it black (yellow)
     Rook(int idx_in);
 
     // Moves piece to desired index and updates board
-    void move(Board *board, int new_idx) override;
+    bool move(Board *board, int new_idx) override;
 };
 
 class Knight : public Piece {
@@ -92,11 +103,11 @@ public:
     // Constructor to initialize pawn. If 2 args, make it white
     Knight(int idx_in, bool w);
 
-    // Constructor to initialize pawn. If 1 arg, make it black (cyan)
+    // Constructor to initialize pawn. If 1 arg, make it black (yellow)
     Knight(int idx_in);
 
     // Moves piece to desired index and updates board
-    void move(Board *board, int new_idx) override;
+    bool move(Board *board, int new_idx) override;
 };
 
 class Bishop : public Piece {
@@ -105,11 +116,11 @@ public:
     // Constructor to initialize pawn. If 2 args, make it white
     Bishop(int idx_in, bool w);
 
-    // Constructor to initialize pawn. If 1 arg, make it black (cyan)
+    // Constructor to initialize pawn. If 1 arg, make it black (yellow)
     Bishop(int idx_in);
 
     // Moves piece to desired index and updates board
-    void move(Board *board, int new_idx) override;
+    bool move(Board *board, int new_idx) override;
 };
 
 class Queen : public Piece {
@@ -118,11 +129,11 @@ public:
     // Constructor to initialize pawn. If 2 args, make it white
     Queen(int idx_in, bool w);
 
-    // Constructor to initialize pawn. If 1 arg, make it black (cyan)
+    // Constructor to initialize pawn. If 1 arg, make it black (yellow)
     Queen(int idx_in);
 
     // Moves piece to desired index and updates board
-    void move(Board *board, int new_idx) override;
+    bool move(Board *board, int new_idx) override;
 };
 
 class King : public Piece {
@@ -131,11 +142,11 @@ public:
     // Constructor to initialize pawn. If 2 args, make it white
     King(int idx_in, bool w);
 
-    // Constructor to initialize pawn. If 1 arg, make it black (cyan)
+    // Constructor to initialize pawn. If 1 arg, make it black (yellow)
     King(int idx_in);
 
     // Moves piece to desired index and updates board
-    void move(Board *board, int new_idx) override;
+    bool move(Board *board, int new_idx) override;
 };
 
 
